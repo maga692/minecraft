@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Словарь - Minecraft</title>
+    <style>
+        /* Стили для словаря */
+        .term-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .term-list li {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin: 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .term-list li:hover {
+            background-color: #f0f0f0;
+        }
+
+        .description {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Minecraft</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Описание</a></li>
+                <li><a href="glossary.html" class="active">Словарь</a></li>
+                <li><a href="gallery.html">Галерея</a></li>
+                <li><a href="quiz.html">Тест</a></li>
+                <li><a href="profile.html">Личный кабинет</a></li>
+                <li><span id="userGreeting"></span> <button id="logoutButton" onclick="logout()">Выйти</button></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Словарь</h2>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Поиск термина..." onkeyup="filterTerms()">
+        </div>
+        <ul class="term-list" id="termList">
+            <li onclick="showDescription('Блок')">Блок</li>
+            <li onclick="showDescription('Крипер')">Крипер</li>
+            <li onclick="showDescription('Дерево')">Дерево</li>
+            <li onclick="showDescription('Кирка')">Кирка</li>
+            <li onclick="showDescription('Верстак')">Верстак</li>
+            <li onclick="showDescription('Руда')">Руда</li>
+            <li onclick="showDescription('Моб')">Моб</li>
+            <li onclick="showDescription('Алмазы')">Алмазы</li>
+            <li onclick="showDescription('Портал')">Портал</li>
+            <li onclick="showDescription('Факел')">Факел</li>
+        </ul>
+        <div class="description" id="descriptionBox">
+            <p>Выберите термин для отображения его описания.</p>
+        </div>
+    </main>
+    <footer>
+         <p>Контактные данные: <a href="#">Телефон</a> <a href="#">ВК</a> <a href="#">Телеграм</a></p>
+        <p>Minecraft © 2024</p>
+    </footer>
+    <script src="js/script.js"></script>
+    <script>
+        const descriptions = {
+            'Блок': 'Блок — это основной строительный элемент в Minecraft, из которого состоит мир. Например, земля, камень, дерево.',
+            'Крипер': 'Крипер — это тихий враг, который взрывается рядом с игроком, если подойти слишком близко.',
+            'Дерево': 'Дерево — это важный ресурс, который добывают с помощью рук или топора. Из него делают инструменты и строят дома.',
+            'Кирка': 'Кирка — это инструмент для добычи твёрдых материалов, таких как камень или руда.',
+            'Верстак': 'Верстак — это предмет, который позволяет создавать более сложные вещи, инструменты и оружие.',
+            'Руда': 'Руда — это блоки, содержащие полезные материалы, например, уголь, железо или алмазы.',
+            'Моб': 'Моб — это любое существо в Minecraft: животное, монстр или житель.',
+            'Алмазы': 'Алмазы — это ценный ресурс, используемый для создания самых прочных инструментов и брони.',
+            'Портал': 'Портал — это магический проход в другое измерение, например, в Нижний мир или Край.',
+            'Факел': 'Факел — это источник света, который защищает от появления монстров в тёмных местах.'
+        };
+        function showDescription(term) {
+            const descriptionBox = document.getElementById('descriptionBox');
+            descriptionBox.innerHTML = `<p><strong>${term}</strong>: ${descriptions[term]}</p>`;
+        }
+
+        function filterTerms() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const termList = document.getElementById('termList');
+            const terms = termList.getElementsByTagName('li');
+
+            for (let i = 0; i < terms.length; i++) {
+                const term = terms[i].textContent.toLowerCase();
+                terms[i].style.display = term.includes(input) ? '' : 'none';
+            }
+        }
+    </script>
+</body>
+</html>

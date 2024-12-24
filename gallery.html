@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Галерея - Minecraft</title>
+    <style>
+        /* Стили для слайдера */
+        .slider {
+            position: relative;
+            max-width: 600px;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .slide img {
+          display: block;
+            height: 320px;
+            object-fit: cover;
+            width: 100%;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .slide p {
+          margin: 0;
+          padding: 20px;
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            align-items: center;
+            transform: translateY(-50%);
+            background-color: #c0392b;
+            border: none;
+            
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .slide-info {
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Minecraft</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Описание</a></li>
+                <li><a href="glossary.html">Словарь</a></li>
+                <li><a href="gallery.html" class="active">Галерея</a></li>
+                <li><a href="quiz.html">Тест</a></li>
+                <li><a href="profile.html">Личный кабинет</a></li>
+                <li><span id="userGreeting"></span> <button id="logoutButton" onclick="logout()">Выйти</button></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Галерея Minecraft</h2>
+        <div class="slider">
+            <div class="slides">
+                <div class="slide">
+                    <img src="images/gallery/minecraft1.jpg" alt="picture 1">
+                    <p>Minecraft Алекс и Стив</p>
+                </div>
+                <div class="slide">
+                    <img src="images/gallery/minecraft2.jpg" alt="picture 2">
+                    <p>Minecraft крутой</p>
+                </div>
+                <div class="slide">
+                    <img src="images/gallery/minecraft3.jpg" alt="picture 3">
+                    <p>Minecraft Летсплеи</p>
+                </div>
+                <div class="slide">
+                    <img src="images/gallery/minecraft4.jpg" alt="picture 4">
+                    <p>Minecraft зомби</p>
+                </div>
+                <div class="slide">
+                    <img src="images/gallery/minecraft5.jpg" alt="picture 5">
+                    <p>Minecraft житель и деревня</p>
+                </div>
+            </div>
+            <button class="nav-button prev" onclick="changeSlide(-1)">&#10094;</button>
+            <button class="nav-button next" onclick="changeSlide(1)">&#10095;</button>
+        </div>
+        <div class="slide-info" id="slideInfo">1 слайд из 5</div>
+    </main>
+    <footer>
+         <p>Контактные данные: <a href="#">Телефон</a> <a href="#">ВК</a> <a href="#">Телеграм</a></p>
+        <p>Minecraft © 2024</p>
+    </footer>
+    <script src="js/script.js"></script>
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            if (index < 0) {
+                currentSlide = 0;
+            } else if (index >= totalSlides) {
+                currentSlide = totalSlides - 1;
+            } else {
+                currentSlide = index;
+            }
+            const slidesContainer = document.querySelector('.slides');
+            slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+            document.getElementById('slideInfo').textContent = `${currentSlide + 1} слайд из ${totalSlides}`;
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
